@@ -1,0 +1,52 @@
+body {
+    background-color: #000000;
+    margin: 0;
+}
+
+.current {
+    margin: 0.5em;
+    font-size: 1.5em;
+    padding-top: 0.5em;
+    text-align: center;
+    border-radius: 1em;
+    height: 3.5em;
+    background-color: #D6EBC4;
+    position: relative;
+    overflow: hidden;
+}
+
+.current-progress-background {
+    background-color: #A3BA49;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    height: 2em;
+    width: 100%;
+}
+
+.current-progress-foreground {
+    background-color: #8D0007;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    height: 2em;
+}
+
+.pending {
+    margin: 0.5em;
+    font-size: 1.5em;
+    padding: 0.5em;
+    text-align: center;
+    border-radius: 1em;
+    background-color: #D6EBC4;
+}
+
+.fin {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+    font-size: 7em;
+}
