@@ -1,24 +1,29 @@
-const durationPerParticipant = moment.duration(1, 'minutes');
-
-let employees = [];
-
-for (let i = employees.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * i);
-    const temp = employees[i];
-    employees[i] = employees[j];
-    employees[j] = temp;
-}
-
 new Vue({
     el: '#app',
     data: {
-        names: employees,
+        duration: null,
+        names: null,
         currentIndex: 0,
         running: false,
         now: moment(),
         end: moment().subtract(1, 'minutes')
     },
     created: function() {
+        let urlSearchParams = new URLSearchParams(window.location.search);
+
+        this.duration = moment.duration(urlSearchParams.get('duration'));
+
+        let names = urlSearchParams.get('names').split(',');
+
+        for (let i = names.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * i);
+            const temp = names[i];
+            names[i] = names[j];
+            names[j] = temp;
+        }
+
+        this.names = names;
+
         var self = this;
         setInterval(function() {
             if (self.running) {
@@ -47,10 +52,7 @@ new Vue({
             return moment.duration(this.end.diff(moment.min(this.end, this.now)));
         },
         missingTimePercentage: function() {
-            return this.running ? 100
-                - this.remainingTime.asMilliseconds()
-                * 100
-                / durationPerParticipant.asMilliseconds() : 0;
+            return this.running ? 100 - this.remainingTime.asMilliseconds() * 100 / this.duration.asMilliseconds() : 0;
         }
     },
     watch: {
@@ -74,7 +76,7 @@ new Vue({
             }
             else {
                 this.now = moment();
-                this.end = moment(this.now).add(durationPerParticipant);
+                this.end = moment(this.now).add(this.duration);
                 this.running = true;
             }
         }
