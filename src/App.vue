@@ -19,7 +19,7 @@
   >
     {{ name }}
   </div>
-  <div v-if="!hasCurrent" class="fin">Fin</div>
+  <div v-if="!hasCurrent" class="fin">So!</div>
 </template>
 
 <script>
