@@ -201,6 +201,7 @@ export default {
       this.addingElement = false;
       if (this.newElement) {
         this.names.push(this.newElement);
+        window.localStorage.setItem("names", this.names.join(","));
         this.newElement = "";
       }
     },
