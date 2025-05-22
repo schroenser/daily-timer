@@ -36,12 +36,16 @@
         <td>Remove first element</td>
       </tr>
       <tr>
-        <td><code>&lt;Ctrl + A&gt;</code></td>
+        <td><code>&lt;Ctrl + Alt + A&gt;</code></td>
         <td>Add person</td>
       </tr>
       <tr>
-        <td><code>&lt;Ctrl + H&gt;</code></td>
+        <td><code>&lt;Ctrl + Alt + H&gt;</code></td>
         <td>Toggle hidden names</td>
+      </tr>
+      <tr>
+        <td><code>&lt;Ctrl + Alt + S&gt;</code></td>
+        <td>Persist current element list</td>
       </tr>
     </table>
   </div>
@@ -80,14 +84,17 @@ export default {
   created: function () {
     let urlSearchParams = new URLSearchParams(window.location.search);
 
-    this.duration = moment.duration(urlSearchParams.get("duration") || 30000);
+    this.duration = moment.duration(
+        urlSearchParams.get("duration") || window.localStorage.getItem("duration") || 60000
+    );
 
     const namesStr = urlSearchParams.get("names") || window.localStorage.getItem("names") || null;
     let names = namesStr ? namesStr.split(",") : [];
 
-    this.hidePending = !!window.localStorage.getItem("hidePending");
+    this.hidePending = Boolean(window.localStorage.getItem("hidePending") === "true") ;
 
     window.localStorage.setItem("names", names.join(","));
+    window.localStorage.setItem("duration", this.duration.asMilliseconds());
 
     for (let i = names.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * i);
@@ -153,39 +160,57 @@ export default {
   },
   methods: {
     onKeyUp: function (event) {
+      let keyHandled = false;
       if (this.addingElement) {
         switch (event.code) {
           case "Escape":
             this.cancelAddElement();
+            keyHandled = true;
             break;
           case "Enter":
             this.finishAddElement();
+            keyHandled = true;
             break;
         }
       } else {
         switch (event.code) {
           case "Space":
             this.toggleTimer();
+            keyHandled = true;
             break;
           case "Backspace":
             this.remove(0);
+            keyHandled = true;
             break;
           case "KeyA":
-            if (event.ctrlKey) {
+            if (event.ctrlKey && event.altKey) {
               this.startAddElement();
+              keyHandled = true;
             }
             break;
           case "KeyH":
-            if (event.ctrlKey) {
+            if (event.ctrlKey && event.altKey) {
               this.hidePending = !this.hidePending;
               window.localStorage.setItem("hidePending", JSON.stringify(this.hidePending));
+              keyHandled = true;
+            }
+            break;
+          case "KeyS":
+            if (event.ctrlKey && event.altKey) {
+              let items = [this.current, ...this.pending];
+              window.localStorage.setItem("names", items.join(","));
+              keyHandled = true;
             }
             break;
           default:
             if (event.key === "?") {
               this.showHelp = !this.showHelp;
+              keyHandled = true;
             }
         }
+      }
+      if (keyHandled) {
+        event.preventDefault();
       }
     },
     startAddElement: async function () {
