@@ -265,6 +265,7 @@ body {
   background-color: #d6ebc4;
   position: relative;
   overflow: hidden;
+  user-select: none;
 }
 
 .current-progress-background {
@@ -291,10 +292,11 @@ body {
   text-align: center;
   border-radius: 1em;
   background-color: #d6ebc4;
+  user-select: none;
 }
 
 .pending.hidden span {
-  filter: blur(5px);
+  opacity: 0;
 }
 
 .fin {
