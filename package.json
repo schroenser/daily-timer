@@ -13,7 +13,7 @@
   "devDependencies": {
     "@vue/cli-service": "^5.0.8",
     "@vue/compiler-sfc": "^3.5.16",
-    "postcss": "^8.5.3"
+    "postcss": "^8.5.4"
   },
   "browserslist": [
     "> 1%",
