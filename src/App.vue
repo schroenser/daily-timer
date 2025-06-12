@@ -27,34 +27,38 @@
   </div>
   <div v-if="hasCurrent && showHelp" class="help">
     <table>
-      <tr>
-        <td><code>&lt;Space&gt;</code></td>
-        <td>Toggle timer</td>
-      </tr>
-      <tr>
-        <td><code>&lt;Backspace&gt;</code></td>
-        <td>Remove first element</td>
-      </tr>
-      <tr>
-        <td><code>&lt;Ctrl + Alt + A&gt;</code></td>
-        <td>Add person</td>
-      </tr>
-      <tr>
-        <td><code>&lt;Ctrl + Alt + H&gt;</code></td>
-        <td>Toggle hidden names</td>
-      </tr>
-      <tr>
-        <td><code>&lt;Ctrl + Alt + S&gt;</code></td>
-        <td>Persist current element list</td>
-      </tr>
+      <tbody>
+        <tr>
+          <td><code>&lt;Space&gt;</code></td>
+          <td>Toggle timer</td>
+        </tr>
+        <tr>
+          <td><code>&lt;Backspace&gt;</code></td>
+          <td>Remove first element</td>
+        </tr>
+        <tr>
+          <td><code>&lt;Ctrl + Alt + A&gt;</code></td>
+          <td>Add person</td>
+        </tr>
+        <tr>
+          <td><code>&lt;Ctrl + Alt + H&gt;</code></td>
+          <td>Toggle hidden names</td>
+        </tr>
+        <tr>
+          <td><code>&lt;Ctrl + Alt + S&gt;</code></td>
+          <td>Persist current element list</td>
+        </tr>
+      </tbody>
     </table>
   </div>
   <div v-if="hasCurrent && !showHelp" class="help">
     <table>
-      <tr>
-        <td><code>&lt;?&gt;</code></td>
-        <td>Show keymap</td>
-      </tr>
+      <tbody>
+        <tr>
+          <td><code>&lt;?&gt;</code></td>
+          <td>Show keymap</td>
+        </tr>
+      </tbody>
     </table>
   </div>
 </template>
