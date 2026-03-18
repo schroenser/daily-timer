@@ -1,9 +1,7 @@
 name: Build
 
 on:
-  push:
-    branches-ignore:
-      - main
+  pull_request: { }
 
 jobs:
   build:
@@ -29,11 +27,16 @@ jobs:
             ${{ runner.os }}-node-
       - name: Install Packages
         run: |
-          npm install
+          npm ci
       - name: Lint Application
         run: |
           npm run lint
       - name: Build Application
         run: |
           npm run build
-
+      - name: Download test browsers
+        run: |
+          npx --no playwright install --with-deps --only-shell
+      - name: Test Application
+        run: |
+          npm run test:ci
