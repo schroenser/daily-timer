@@ -13,3 +13,7 @@ updates:
       dependencies:
         patterns:
           - "*"
+    ignore:
+      - dependency-name: "typescript"
+        # "typescript-eslint": "^8.57.2" requires typescript to be < 6.0.0
+        versions: [ ">=6.0.0" ]
