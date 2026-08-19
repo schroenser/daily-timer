@@ -37,6 +37,6 @@
     "vite-plugin-eslint": "^1.8.1",
     "vitest": "^4.1.0",
     "vitest-browser-vue": "^2.1.0",
-    "vue-tsc": "^3.3.9"
+    "vue-tsc": "^3.3.10"
   }
 }
